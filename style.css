@@ -14,6 +14,7 @@ nav {
 
 .card {
     background-color: #6666CC;
+    border-radius: 20px;
 }
 
 #heart {
