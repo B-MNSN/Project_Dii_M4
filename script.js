@@ -1,7 +1,14 @@
-// var movies = {}
-// movies.url = 'https://i.pinimg.com/564x/61/f5/cc/61f5ccad28bad6756d7f05daf98a2b1a.jpg'
-// movies.name = 'nnn'
-// movies.inform = 'mmmmmmmmmmmmm'
+var cardList = document.getElementById('cardList')
+var slideCard = document.getElementById('slide-card')
+var movieFavorite = document.getElementById('movie-favorite')
+
+function hideAll() {
+    cardList.style.display = 'none'
+    slideCard.style.display = 'none'
+    movieFavorite.style.display = 'none'
+}
+
+
 
 function addMovieToRow(movies) {
     const cardList = document.getElementById('cardList')
@@ -39,7 +46,7 @@ function addMovieToRow(movies) {
 
 }
 window.addEventListener('load', function() {
-    addMovie()
+    hideAll()
 })
 
 function addMovie(movie) {
@@ -70,3 +77,16 @@ function listMovie(mL) {
         addMovieToRow(movies)
     }
 }
+
+document.getElementById('menu-home').addEventListener('click', (event) => {
+    hideAll()
+    cardList.style.display = 'block'
+    slideCard.style.display = 'block'
+
+})
+
+document.getElementById('menu-favorite').addEventListener('click', (event) => {
+    hideAll()
+    movieFavorite.style.display = 'block'
+
+})
