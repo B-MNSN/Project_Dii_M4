@@ -15,14 +15,14 @@ function addMovieToRow(movies) {
     div.classList.add('card')
     div.classList.add('mx-3')
     div.classList.add('my-3')
-    div.style.height = '22rem'
-    div.style.width = '15rem'
+        // div.style.height = '22rem'
+    div.style.width = '18rem'
     img.setAttribute('src', `${movies.images.jpg.image_url}`)
     img.classList.add('img-fluid')
     img.classList.add('my-4')
     img.classList.add('mx-2')
     img.classList.add('rounded-4')
-    img.classList.add('h-50')
+        // img.classList.add('h-50')
     div.appendChild(img)
     let divChild = document.createElement('div')
     div.appendChild(divChild)
