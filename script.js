@@ -160,3 +160,16 @@ function addMovieToFavorite(movie) {
 // window.addEventListener('load', function() {
 //     addMovie()
 // })
+
+document.getElementById('searchBtn').addEventListener('click', () => {
+    let search = document.getElementById('search').value
+    console.log(search)
+    fetch(`https://api.jikan.moe/v4/anime?q=${search}&sfw`)
+        .then(response => {
+            return response.json()
+        }).then(data => {
+            console.log(data)
+            hideAll()
+            listMovie(data.data)
+        })
+})
