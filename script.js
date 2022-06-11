@@ -3,7 +3,7 @@ var slideCard = document.getElementById('slide-card')
 var movieFavorite = document.getElementById('movie-favorite')
 
 function hideAll() {
-    cardList.style.display = 'none'
+    cardList.style.visibility = 'hidden'
     slideCard.style.display = 'none'
     movieFavorite.style.display = 'none'
 }
@@ -17,6 +17,8 @@ function addMovieToRow(movies) {
     div.classList.add('my-3')
         // div.style.height = '22rem'
     div.style.width = '18rem'
+        // div.setAttribute('id', 'card')
+        // div.setAttribute('onclick', 'click()')
     img.setAttribute('src', `${movies.images.jpg.image_url}`)
     img.classList.add('img-fluid')
     img.classList.add('my-4')
@@ -24,22 +26,46 @@ function addMovieToRow(movies) {
     img.classList.add('rounded-4')
         // img.classList.add('h-50')
     div.appendChild(img)
+
+
     let divChild = document.createElement('div')
     div.appendChild(divChild)
     divChild.classList.add('card-body')
+
+    let divInform = document.createElement('div')
+    divInform.setAttribute('id', 'nameMovie')
+    divChild.appendChild(divInform)
+
     let h5 = document.createElement('h5')
-    let p = document.createElement('p')
-    let i = document.createElement('i')
     h5.innerText = `${movies.title}`
-    divChild.appendChild(h5)
-        // p.innerText = movies.synopsis
-    divChild.appendChild(p)
+    divInform.appendChild(h5)
+
+    let divHeart = document.createElement('div')
+    divHeart.setAttribute('id', 'likeIcon')
+    divHeart.classList.add('float-end')
+    divChild.appendChild(divHeart)
+
+    let i = document.createElement('i')
     i.classList.add('bi')
     i.classList.add('bi-heart')
-    i.classList.add('float-end')
     i.setAttribute('id', 'heart')
     i.classList.add('fs-3')
-    divChild.appendChild(i)
+        // i.setAttribute('onclick', 'click()')
+    i.addEventListener('dblclick', function() {
+        let conf = confirm(`ต้องการเพิ่ม ${movies.title} ?`)
+        if (conf) {
+            console.log(1)
+            if (i.classList.contains('toggleOn')) {
+                i.classList.replace('toggleOn', 'toggleOff')
+            } else if (i.classList.contains('toggleOff')) {
+                i.classList.replace('toggleOff', 'toggleOn')
+            } else(
+                i.classList.add('toggleOn')
+            )
+        }
+    })
+    divHeart.appendChild(i)
+
     cardList.appendChild(div)
 
 }
@@ -73,8 +99,9 @@ function listMovie(mL) {
 
 document.getElementById('menu-home').addEventListener('click', (event) => {
     hideAll()
-    cardList.style.display = 'block'
+    cardList.style.visibility = 'visible'
     slideCard.style.display = 'block'
+    addMovie()
 })
 
 document.getElementById('menu-favorite').addEventListener('click', (event) => {
@@ -91,7 +118,7 @@ document.getElementById('menu-favorite').addEventListener('click', (event) => {
 
 function onLoad() {
     hideAll()
-    cardList.style.display = 'block'
+    cardList.style.visibility = 'visible'
     slideCard.style.display = 'block'
     addMovie()
 }
@@ -170,6 +197,23 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         }).then(data => {
             console.log(data)
             hideAll()
+            cardList.style.visibility = "visible"
             listMovie(data.data)
         })
 })
+
+// document.getElementById('heart').addEventListener('click', function(e) {
+//     let heartICon = document.getElementById('heart')
+//         // heart.classList.contains('toggleOn')
+//     if (heartICon.classList.contains('toggleOn')) {
+//         heartICon.classList.replace('toggleOn', 'toggleOff')
+//     } else if (heartICon.classList.contains('toggleOff')) {
+//         heartICon.classList.replace('toggleOff', 'toggleOn')
+//     } else(
+//         heartICon.classList.add('toggleOn')
+//     )
+// })
+
+function click() {
+    console.log(1)
+}
