@@ -17,6 +17,8 @@ function addMovieToRow(movies, movieDB) {
     div.classList.add('my-3')
         // div.style.height = '22rem'
     div.style.width = '18rem'
+    div.setAttribute('data-bs-toggle', 'modal')
+    div.setAttribute('data-bs-target', '#exampleModal')
     img.setAttribute('src', `${movies.images.jpg.image_url}`)
     img.classList.add('img-fluid')
     img.classList.add('my-4')
