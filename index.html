@@ -86,17 +86,21 @@
         </div>
     </div> -->
 
-    <div class="row d-flex justify-content-center mt-5" id="cardList">
+    <div id="outside">
+        <div class="row d-flex justify-content-center mt-5" id="cardList">
 
-        <!-- <div class="card mx-3 my-3" style="width: 15rem;">
-            <img src="https://i.pinimg.com/564x/dc/65/77/dc65771d7831c47e89a9e49949292d9d.jpg" class="img-fluid my-4 mx-2 rounded-3" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <i class="bi bi-heart float-end" id="heart"></i>
-            </div>
-        </div> -->
+            <!-- <div class="card mx-3 my-3" style="width: 15rem;">
+                <img src="https://i.pinimg.com/564x/dc/65/77/dc65771d7831c47e89a9e49949292d9d.jpg" class="img-fluid my-4 mx-2 rounded-3" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <i class="bi bi-heart float-end" id="heart"></i>
+                </div>
+            </div> -->
+        </div>
+
     </div>
+
 
     <!-- favorite movie -->
 
@@ -120,6 +124,56 @@
                 </div>
             </div>
         </div> -->
+    </div>
+
+    <!-- Modal Movies -->
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="https://i.guim.co.uk/img/media/25f6f3c46759ea26344214ed199f762248963dd7/0_3_2511_1506/master/2511.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=bc37b5d72c85fee53dfca4fa501e2e3c" width="50%" height="100%" class="img-fluid rounded-4">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-3" id="nameMovie"><b>Name movie</b></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"><b>type :</b></div>
+                                <div class="col-3" id="typeMovie"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"><b>episodes :</b></div>
+                                <div class="col-3" id="epMovie"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"><b>rated :</b></div>
+                                <div class="col-3" id="ratedMovie"></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"><b>synopsis :</b></div>
+                                <div class="col-3" id="synopsisMovie"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class=" modal-footer ">
+                    <button type="button " class="btn btn-secondary " data-bs-dismiss="modal ">Close</button>
+                    <button type="button " class="btn btn-primary ">Save changes</button>
+                </div> -->
+            </div>
+        </div>
     </div>
 
     <!-- script -->

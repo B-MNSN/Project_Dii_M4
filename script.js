@@ -1,14 +1,14 @@
-var cardList = document.getElementById('cardList')
+var cardList = document.getElementById('outside')
 var slideCard = document.getElementById('slide-card')
 var movieFavorite = document.getElementById('movie-favorite')
 
 function hideAll() {
-    cardList.style.visibility = 'hidden'
+    cardList.style.display = 'none'
     slideCard.style.display = 'none'
     movieFavorite.style.display = 'none'
 }
 
-function addMovieToRow(movies) {
+function addMovieToRow(movies, movieDB) {
     const cardList = document.getElementById('cardList')
     let div = document.createElement('div')
     let img = document.createElement('img')
@@ -22,7 +22,7 @@ function addMovieToRow(movies) {
     img.classList.add('my-4')
     img.classList.add('mx-2')
     img.classList.add('rounded-4')
-        // img.classList.add('h-50')
+    img.style.height = '20rem'
     div.appendChild(img)
 
     let divChild = document.createElement('div')
@@ -47,17 +47,19 @@ function addMovieToRow(movies) {
     i.classList.add('bi-heart')
     i.setAttribute('id', 'heart')
     i.classList.add('fs-3')
-    i.addEventListener('click', function() {
+    i.addEventListener('dblclick', function() {
         let conf = confirm(`ต้องการเพิ่ม ${movies.title} ?`)
         if (conf) {
-            console.log(1)
-            if (i.classList.contains('toggleOn')) {
-                i.classList.replace('toggleOn', 'toggleOff')
-            } else if (i.classList.contains('toggleOff')) {
-                i.classList.replace('toggleOff', 'toggleOn')
-            } else(
-                i.classList.add('toggleOn')
-            )
+            console.log('api', movies)
+            console.log('DB', movieDB)
+                // if (i.classList.contains('toggleOn')) {
+                //     i.classList.replace('toggleOn', 'toggleOff')
+                // } else if (i.classList.contains('toggleOff')) {
+                //     i.classList.replace('toggleOff', 'toggleOn')
+                // } else(
+                //         i.classList.add('toggleOn')
+                //     )
+                // toggle(movies, movieDB)
             onAddMovieClickToFavorite(movies)
         }
     })
@@ -67,6 +69,22 @@ function addMovieToRow(movies) {
 }
 window.addEventListener('load', onLoad)
 
+function toggle(movies, movieDB) {
+    // console.log('api', movies.title);
+    // console.log('DB', movieDB);
+    let heart = document.getElementById('heart')
+        // if (checkDB === checkApi) {
+        //     heart.classList.add('toggleOn')
+        // }
+        // if (heart.classList.contains('toggleOn')) {
+        //     heart.classList.replace('toggleOn', 'toggleOff')
+        // } else if (heart.classList.contains('toggleOff')) {
+        //     heart.classList.replace('toggleOff', 'toggleOn')
+        // } else(
+        //     heart.classList.add('toggleOn')
+        // )
+}
+
 
 function addMovie() {
     fetch('https://api.jikan.moe/v4/top/anime')
@@ -75,13 +93,23 @@ function addMovie() {
         }).then(data => {
             console.log('success', data)
             listMovie(data.data)
-
         })
 }
 
+function getMovieFavorite() {
+    fetch('https://se104-project-backend.du.r.appspot.com/movies/642110326')
+        .then(response => {
+            return response.json()
+        }).then(data => {
+            console.log('db', data)
+            listMovieFavorite(data)
+        })
+}
+
+
 function onAddMovieClickToFavorite(movies) {
     let movie = {}
-    movie.id = '326'
+    movie.id = '642110326'
     movie.movie = {
         'url': movies.url,
         'image_url': movies.images.jpg.image_url,
@@ -106,7 +134,6 @@ function addMovieToDB(movies) {
         return response.json()
     }).then(data => {
         console.log('success', data)
-            // addMovieToFavorite()
     })
 }
 
@@ -115,13 +142,20 @@ function listMovie(mL) {
     cardList.innerHTML = ''
     for (movies of mL) {
         addMovieToRow(movies)
-            // addMovieToFavorite(movies)
+    }
+}
+
+function listMovieFavorite(listMovieFavorite) {
+    const movieFavorite = document.getElementById('movie-favorite')
+    movieFavorite.innerHTML = ''
+    for (movies of listMovieFavorite) {
+        addMovieToFavorite(movies)
     }
 }
 
 document.getElementById('menu-home').addEventListener('click', (event) => {
     hideAll()
-    cardList.style.visibility = 'visible'
+    cardList.style.display = 'block'
     slideCard.style.display = 'block'
     addMovie()
 })
@@ -129,11 +163,12 @@ document.getElementById('menu-home').addEventListener('click', (event) => {
 document.getElementById('menu-favorite').addEventListener('click', (event) => {
     hideAll()
     movieFavorite.style.display = 'block'
+    getMovieFavorite()
 })
 
 function onLoad() {
     hideAll()
-    cardList.style.visibility = 'visible'
+    cardList.style.display = 'block'
     slideCard.style.display = 'block'
     addMovie()
 }
@@ -174,7 +209,7 @@ function addMovieToFavorite(movie) {
     div5.appendChild(h5)
 
     let p = document.createElement('p')
-    p.innerText = movie.synopsis
+        // p.innerText = movie.synopsis
     div5.appendChild(p)
 
     let div6 = document.createElement('div')
@@ -208,7 +243,7 @@ document.getElementById('searchBtn').addEventListener('click', () => {
         }).then(data => {
             console.log(data)
             hideAll()
-            cardList.style.visibility = "visible"
+            cardList.style.display = "block"
             listMovie(data.data)
         })
 })
