@@ -17,8 +17,6 @@ function addMovieToRow(movies) {
     div.classList.add('my-3')
         // div.style.height = '22rem'
     div.style.width = '18rem'
-        // div.setAttribute('id', 'card')
-        // div.setAttribute('onclick', 'click()')
     img.setAttribute('src', `${movies.images.jpg.image_url}`)
     img.classList.add('img-fluid')
     img.classList.add('my-4')
@@ -27,22 +25,21 @@ function addMovieToRow(movies) {
         // img.classList.add('h-50')
     div.appendChild(img)
 
-
     let divChild = document.createElement('div')
     div.appendChild(divChild)
     divChild.classList.add('card-body')
-
-    let divInform = document.createElement('div')
-    divInform.setAttribute('id', 'nameMovie')
-    divChild.appendChild(divInform)
+    divChild.classList.add('d-flex')
+    divChild.classList.add('align-content-between')
+    divChild.classList.add('row')
 
     let h5 = document.createElement('h5')
     h5.innerText = `${movies.title}`
-    divInform.appendChild(h5)
+    divChild.appendChild(h5)
 
     let divHeart = document.createElement('div')
     divHeart.setAttribute('id', 'likeIcon')
-    divHeart.classList.add('float-end')
+    divHeart.classList.add('d-flex')
+    divHeart.classList.add('justify-content-end')
     divChild.appendChild(divHeart)
 
     let i = document.createElement('i')
@@ -50,8 +47,7 @@ function addMovieToRow(movies) {
     i.classList.add('bi-heart')
     i.setAttribute('id', 'heart')
     i.classList.add('fs-3')
-        // i.setAttribute('onclick', 'click()')
-    i.addEventListener('dblclick', function() {
+    i.addEventListener('click', function() {
         let conf = confirm(`ต้องการเพิ่ม ${movies.title} ?`)
         if (conf) {
             console.log(1)
@@ -62,14 +58,15 @@ function addMovieToRow(movies) {
             } else(
                 i.classList.add('toggleOn')
             )
+            onAddMovieClickToFavorite(movies)
         }
     })
     divHeart.appendChild(i)
-
     cardList.appendChild(div)
 
 }
 window.addEventListener('load', onLoad)
+
 
 function addMovie() {
     fetch('https://api.jikan.moe/v4/top/anime')
@@ -82,11 +79,36 @@ function addMovie() {
         })
 }
 
-// function aM() {
-//     fetch('https://se104-project-backend.du.r.appspot.com/movies/601232100')
-//         .then(response => response.json())
-//         .then(data => addMovieToRow(data))
-// }
+function onAddMovieClickToFavorite(movies) {
+    let movie = {}
+    movie.id = '326'
+    movie.movie = {
+        'url': movies.url,
+        'image_url': movies.images.jpg.image_url,
+        'title': movies.title,
+        'synopsis': movies.synopsis,
+        'type': movies.type,
+        'episodes': movies.episodes,
+        'score': movies.score,
+        'rated': movies.rated,
+    }
+    addMovieToDB(movie)
+}
+
+function addMovieToDB(movies) {
+    fetch('https://se104-project-backend.du.r.appspot.com/movies', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(movies)
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        console.log('success', data)
+            // addMovieToFavorite()
+    })
+}
 
 function listMovie(mL) {
     const cardList = document.getElementById('cardList')
@@ -108,13 +130,6 @@ document.getElementById('menu-favorite').addEventListener('click', (event) => {
     hideAll()
     movieFavorite.style.display = 'block'
 })
-
-// function showAllMovie() {
-//     hideAll()
-//     cardList.style.display = 'block'
-//     slideCard.style.display = 'block'
-//     addMovie()
-// }
 
 function onLoad() {
     hideAll()
@@ -184,10 +199,6 @@ function addMovieToFavorite(movie) {
     movieFavor.appendChild(div1)
 }
 
-// window.addEventListener('load', function() {
-//     addMovie()
-// })
-
 document.getElementById('searchBtn').addEventListener('click', () => {
     let search = document.getElementById('search').value
     console.log(search)
@@ -201,19 +212,3 @@ document.getElementById('searchBtn').addEventListener('click', () => {
             listMovie(data.data)
         })
 })
-
-// document.getElementById('heart').addEventListener('click', function(e) {
-//     let heartICon = document.getElementById('heart')
-//         // heart.classList.contains('toggleOn')
-//     if (heartICon.classList.contains('toggleOn')) {
-//         heartICon.classList.replace('toggleOn', 'toggleOff')
-//     } else if (heartICon.classList.contains('toggleOff')) {
-//         heartICon.classList.replace('toggleOff', 'toggleOn')
-//     } else(
-//         heartICon.classList.add('toggleOn')
-//     )
-// })
-
-function click() {
-    console.log(1)
-}
