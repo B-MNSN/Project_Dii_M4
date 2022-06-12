@@ -67,6 +67,10 @@ function addMovieToRow(movies, movieDB) {
     })
     divHeart.appendChild(i)
     cardList.appendChild(div)
+    div.addEventListener('click', function() {
+        showDetailsMovie(movies)
+    })
+
 
 }
 window.addEventListener('load', onLoad)
@@ -85,6 +89,23 @@ function toggle(movies, movieDB) {
         // } else(
         //     heart.classList.add('toggleOn')
         // )
+}
+
+function showDetailsMovie(movie) {
+    console.log('wow', movie)
+    let imgMovie = document.getElementById('imgMovie')
+    imgMovie.setAttribute('src', movie.images.jpg.image_url)
+    let nameMovie = document.getElementById('nameMovie')
+    nameMovie.innerHTML = movie.title
+    let typeMovie = document.getElementById('typeMovie')
+    typeMovie.innerHTML = movie.type
+    let episodesMovie = document.getElementById('epMovie')
+    episodesMovie.innerHTML = movie.episodes
+    let ratedMovie = document.getElementById('ratedMovie')
+    ratedMovie.innerHTML = movie.rating
+    let synopsisMovie = document.getElementById('synopsisMovie')
+    synopsisMovie.innerHTML = movie.synopsis
+
 }
 
 
