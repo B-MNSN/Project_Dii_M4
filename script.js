@@ -66,6 +66,8 @@ function addMovieToRow(movies, movieDB) {
     divHeart.appendChild(i)
     cardList.appendChild(div)
     img.addEventListener('click', function() {
+        img.setAttribute('data-bs-toggle', 'modal')
+        img.setAttribute('data-bs-target', '#exampleModal')
         showDetailsMovie(movies)
     })
 }
@@ -89,9 +91,9 @@ function toggle(movies, movieDB) {
 
 function showDetailsMovie(movie) {
     console.log('wow', movie)
-    let imgSet = document.getElementById('imgSet')
-    imgSet.setAttribute('data-bs-toggle', 'modal')
-    imgSet.setAttribute('data-bs-target', '#exampleModal')
+        // let imgSet = document.getElementById('imgSet')
+        // imgSet.setAttribute('data-bs-toggle', 'modal')
+        // imgSet.setAttribute('data-bs-target', '#exampleModal')
     let imgMovie = document.getElementById('imgMovie')
     imgMovie.setAttribute('src', movie.images.jpg.image_url)
     let nameMovie = document.getElementById('nameMovie')
