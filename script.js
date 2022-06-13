@@ -91,9 +91,6 @@ function toggle(movies, movieDB) {
 
 function showDetailsMovie(movie) {
     console.log('wow', movie)
-        // let imgSet = document.getElementById('imgSet')
-        // imgSet.setAttribute('data-bs-toggle', 'modal')
-        // imgSet.setAttribute('data-bs-target', '#exampleModal')
     let imgMovie = document.getElementById('imgMovie')
     imgMovie.setAttribute('src', movie.images.jpg.image_url)
     let nameMovie = document.getElementById('nameMovie')
@@ -201,7 +198,6 @@ function addMovieToFavorite(movie) {
     let div1 = document.createElement('div')
     div1.classList.add('my-5')
     div1.classList.add('mx-2')
-    div1.style.maxWidth = '540px'
     div1.classList.add('card')
 
     let div2 = document.createElement('div')
@@ -209,7 +205,7 @@ function addMovieToFavorite(movie) {
     div1.appendChild(div2)
 
     let div3 = document.createElement('div')
-    div3.classList.add('col-md-4')
+    div3.classList.add('col-md-3')
     div3.classList.add('my-3')
     div2.appendChild(div3)
 
@@ -217,14 +213,20 @@ function addMovieToFavorite(movie) {
     img.setAttribute('src', movie.image_url)
     img.classList.add('img-fluid')
     img.classList.add('rounded-4')
+    img.style.height = '20rem'
+    img.style.width = '15rem'
     div3.appendChild(img)
 
     let div4 = document.createElement('div')
-    div4.classList.add('col-md-8')
+    div4.classList.add('col-md-9')
+    div4.classList.add('d-flex')
     div2.appendChild(div4)
 
     let div5 = document.createElement('div')
     div5.classList.add('card-body')
+    div5.classList.add('d-flex')
+    div5.classList.add('align-content-between')
+    div5.classList.add('row')
     div4.appendChild(div5)
 
     let h5 = document.createElement('h5')
@@ -236,7 +238,8 @@ function addMovieToFavorite(movie) {
     div5.appendChild(p)
 
     let div6 = document.createElement('div')
-    div6.classList.add('float-end')
+    div6.classList.add('d-flex')
+    div6.classList.add('justify-content-end')
     div6.classList.add('mb-2')
     div5.appendChild(div6)
 
@@ -254,6 +257,19 @@ function addMovieToFavorite(movie) {
     button.innerText = 'Detail...'
     div6.appendChild(button)
 
+    let deleteBtn = document.createElement('button')
+    deleteBtn.classList.add('rounded-3')
+    deleteBtn.classList.add('border-0')
+    deleteBtn.classList.add('ms-3')
+    deleteBtn.innerText = 'Delete'
+    deleteBtn.addEventListener('click', function() {
+        let conf = confirm(`You want to remove ${movie.title} from list`)
+        if (conf) {
+            deleteMovie(movie.id)
+        }
+    })
+    div6.appendChild(deleteBtn)
+
     movieFavor.appendChild(div1)
 }
 
@@ -270,3 +286,20 @@ document.getElementById('searchBtn').addEventListener('click', () => {
             listMovie(data.data)
         })
 })
+
+function deleteMovie(id) {
+    fetch(`https://se104-project-backend.du.r.appspot.com/movie?id=642110326&&movieId=${id}`, {
+        method: 'DELETE'
+    }).then(response => {
+        if (response.status === 200) {
+            return response.json()
+        } else {
+            throw Error(response.statusText)
+        }
+    }).then(data => {
+        alert(`${data.title} is not now delete`)
+        onLoad()
+    }).catch(error => {
+        alert('Your movie is not in the database')
+    })
+}
