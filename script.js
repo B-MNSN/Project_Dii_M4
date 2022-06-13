@@ -22,7 +22,12 @@ function addMovieToRow(movies, movieDB) {
     img.classList.add('my-4')
     img.classList.add('mx-2')
     img.classList.add('rounded-4')
+    img.setAttribute('data-bs-toggle', 'modal')
+    img.setAttribute('data-bs-target', '#exampleModal')
     img.style.height = '20rem'
+    img.addEventListener('click', function() {
+        showDetailsMovie(movies)
+    })
     div.appendChild(img)
 
     let divChild = document.createElement('div')
@@ -34,6 +39,11 @@ function addMovieToRow(movies, movieDB) {
 
     let h5 = document.createElement('h5')
     h5.innerText = `${movies.title}`
+    h5.setAttribute('data-bs-toggle', 'modal')
+    h5.setAttribute('data-bs-target', '#exampleModal')
+    h5.addEventListener('click', function() {
+        showDetailsMovie(movies)
+    })
     divChild.appendChild(h5)
 
     let divHeart = document.createElement('div')
@@ -65,11 +75,7 @@ function addMovieToRow(movies, movieDB) {
     })
     divHeart.appendChild(i)
     cardList.appendChild(div)
-    img.addEventListener('click', function() {
-        img.setAttribute('data-bs-toggle', 'modal')
-        img.setAttribute('data-bs-target', '#exampleModal')
-        showDetailsMovie(movies)
-    })
+
 }
 window.addEventListener('load', onLoad)
 
@@ -254,7 +260,15 @@ function addMovieToFavorite(movie) {
     let button = document.createElement('button')
     button.classList.add('rounded-3')
     button.classList.add('border-0')
+    button.setAttribute('data-bs-toggle', 'modal')
+    button.setAttribute('data-bs-target', '#exampleModal')
     button.innerText = 'Detail...'
+    button.addEventListener('click', function() {
+
+
+
+        showDetailsMovie(movie)
+    })
     div6.appendChild(button)
 
     let deleteBtn = document.createElement('button')
