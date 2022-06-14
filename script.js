@@ -22,6 +22,7 @@ function addMovieToRow(movies, movieDB) {
     img.classList.add('my-4')
     img.classList.add('mx-2')
     img.classList.add('rounded-4')
+    img.classList.add('shadow')
     img.setAttribute('data-bs-toggle', 'modal')
     img.setAttribute('data-bs-target', '#exampleModal')
     img.style.height = '20rem'
@@ -77,6 +78,7 @@ function addMovieToRow(movies, movieDB) {
     cardList.appendChild(div)
 
 }
+
 window.addEventListener('load', onLoad)
 
 function toggle(movies, movieDB) {
@@ -99,6 +101,22 @@ function showDetailsMovie(movie) {
     console.log('wow', movie)
     let imgMovie = document.getElementById('imgMovie')
     imgMovie.setAttribute('src', movie.images.jpg.image_url)
+    let nameMovie = document.getElementById('nameMovie')
+    nameMovie.innerHTML = movie.title
+    let typeMovie = document.getElementById('typeMovie')
+    typeMovie.innerHTML = movie.type
+    let episodesMovie = document.getElementById('epMovie')
+    episodesMovie.innerHTML = movie.episodes
+    let ratedMovie = document.getElementById('ratedMovie')
+    ratedMovie.innerHTML = movie.rating
+    let synopsisMovie = document.getElementById('synopsisMovie')
+    synopsisMovie.innerHTML = movie.synopsis
+}
+
+function showDetailsMovieFavor(movie) {
+    console.log('wow', movie)
+    let imgMovie = document.getElementById('imgMovie')
+    imgMovie.setAttribute('src', movie.image_url)
     let nameMovie = document.getElementById('nameMovie')
     nameMovie.innerHTML = movie.title
     let typeMovie = document.getElementById('typeMovie')
@@ -219,6 +237,7 @@ function addMovieToFavorite(movie) {
     img.setAttribute('src', movie.image_url)
     img.classList.add('img-fluid')
     img.classList.add('rounded-4')
+    img.classList.add('shadow')
     img.style.height = '20rem'
     img.style.width = '15rem'
     div3.appendChild(img)
@@ -235,9 +254,9 @@ function addMovieToFavorite(movie) {
     div5.classList.add('row')
     div4.appendChild(div5)
 
-    let h5 = document.createElement('h5')
-    h5.innerText = movie.title
-    div5.appendChild(h5)
+    let h3 = document.createElement('h3')
+    h3.innerText = movie.title
+    div5.appendChild(h3)
 
     let p = document.createElement('p')
         // p.innerText = movie.synopsis
@@ -262,12 +281,10 @@ function addMovieToFavorite(movie) {
     button.classList.add('border-0')
     button.setAttribute('data-bs-toggle', 'modal')
     button.setAttribute('data-bs-target', '#exampleModal')
+    button.classList.add('shadow')
     button.innerText = 'Detail...'
     button.addEventListener('click', function() {
-
-
-
-        showDetailsMovie(movie)
+        showDetailsMovieFavor(movie)
     })
     div6.appendChild(button)
 
@@ -275,6 +292,7 @@ function addMovieToFavorite(movie) {
     deleteBtn.classList.add('rounded-3')
     deleteBtn.classList.add('border-0')
     deleteBtn.classList.add('ms-3')
+    deleteBtn.classList.add('shadow')
     deleteBtn.innerText = 'Delete'
     deleteBtn.addEventListener('click', function() {
         let conf = confirm(`You want to remove ${movie.title} from list`)
@@ -316,4 +334,14 @@ function deleteMovie(id) {
     }).catch(error => {
         alert('Your movie is not in the database')
     })
+}
+
+function randomMovie() {
+    fetch('https://api.jikan.moe/v4/top/anime')
+        .then(response => {
+            return response.json()
+        }).then(data => {
+            console.log('yoooo', data)
+            listMovieSlide(data.data)
+        })
 }
