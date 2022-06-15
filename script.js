@@ -1,6 +1,6 @@
 var cardList = document.getElementById('outside')
 var slideCard = document.getElementById('slide-card')
-var movieFavorite = document.getElementById('movie-favorite')
+var movieFavorite = document.getElementById('outsideFavor')
 
 function hideAll() {
     cardList.style.display = 'none'
@@ -59,18 +59,17 @@ function addMovieToRow(movies, movieDB) {
     i.setAttribute('id', 'heart')
     i.classList.add('fs-3')
     i.addEventListener('dblclick', function() {
-        let conf = confirm(`ต้องการเพิ่ม ${movies.title} ?`)
+        let conf = confirm(`Add ${movies.title} to favorite?`)
         if (conf) {
             console.log('api', movies)
             console.log('DB', movieDB)
-                // if (i.classList.contains('toggleOn')) {
-                //     i.classList.replace('toggleOn', 'toggleOff')
-                // } else if (i.classList.contains('toggleOff')) {
-                //     i.classList.replace('toggleOff', 'toggleOn')
-                // } else(
-                //         i.classList.add('toggleOn')
-                //     )
-                // toggle(movies, movieDB)
+            if (i.classList.contains('toggleOn')) {
+                i.classList.replace('toggleOn', 'toggleOff')
+            } else if (i.classList.contains('toggleOff')) {
+                i.classList.replace('toggleOff', 'toggleOn')
+            } else(
+                i.classList.add('toggleOn')
+            )
             onAddMovieClickToFavorite(movies)
         }
     })
@@ -81,22 +80,6 @@ function addMovieToRow(movies, movieDB) {
 
 window.addEventListener('load', onLoad)
 
-function toggle(movies, movieDB) {
-    // console.log('api', movies.title);
-    // console.log('DB', movieDB);
-    let heart = document.getElementById('heart')
-        // if (checkDB === checkApi) {
-        //     heart.classList.add('toggleOn')
-        // }
-        // if (heart.classList.contains('toggleOn')) {
-        //     heart.classList.replace('toggleOn', 'toggleOff')
-        // } else if (heart.classList.contains('toggleOff')) {
-        //     heart.classList.replace('toggleOff', 'toggleOn')
-        // } else(
-        //     heart.classList.add('toggleOn')
-        // )
-}
-
 function showDetailsMovie(movie) {
     console.log('wow', movie)
     let imgMovie = document.getElementById('imgMovie')
@@ -104,13 +87,15 @@ function showDetailsMovie(movie) {
     let nameMovie = document.getElementById('nameMovie')
     nameMovie.innerHTML = movie.title
     let typeMovie = document.getElementById('typeMovie')
-    typeMovie.innerHTML = movie.type
+    typeMovie.innerHTML = `<b>Type : </b>  ${movie.type}`
     let episodesMovie = document.getElementById('epMovie')
-    episodesMovie.innerHTML = movie.episodes
     let ratedMovie = document.getElementById('ratedMovie')
-    ratedMovie.innerHTML = movie.rating
+    ratedMovie.innerHTML = `<b>Rated :</b> ${movie.rating}`
+    episodesMovie.innerHTML = `<b>Episodes :</b> ${movie.episodes}`
+    let scoreMovie = document.getElementById('scoreMovie')
+    scoreMovie.innerHTML = `<b>Score :</b>  ${movie.score}`
     let synopsisMovie = document.getElementById('synopsisMovie')
-    synopsisMovie.innerHTML = movie.synopsis
+    synopsisMovie.innerHTML = `<b>SynopsisMovie :</b >  ${movie.synopsis}`
 }
 
 function showDetailsMovieFavor(movie) {
@@ -120,13 +105,15 @@ function showDetailsMovieFavor(movie) {
     let nameMovie = document.getElementById('nameMovie')
     nameMovie.innerHTML = movie.title
     let typeMovie = document.getElementById('typeMovie')
-    typeMovie.innerHTML = movie.type
+    typeMovie.innerHTML = `<b>Type : </b>  ${movie.type}`
     let episodesMovie = document.getElementById('epMovie')
-    episodesMovie.innerHTML = movie.episodes
     let ratedMovie = document.getElementById('ratedMovie')
-    ratedMovie.innerHTML = movie.rating
+    ratedMovie.innerHTML = `<b>Rated :</b> ${movie.rated}`
+    episodesMovie.innerHTML = `<b>Episodes :</b> ${movie.episodes}`
+    let scoreMovie = document.getElementById('scoreMovie')
+    scoreMovie.innerHTML = `<b>Score :</b>  ${movie.score}`
     let synopsisMovie = document.getElementById('synopsisMovie')
-    synopsisMovie.innerHTML = movie.synopsis
+    synopsisMovie.innerHTML = `<b>SynopsisMovie :</b >  ${movie.synopsis}`
 }
 
 
@@ -162,7 +149,7 @@ function onAddMovieClickToFavorite(movies) {
         'type': movies.type,
         'episodes': movies.episodes,
         'score': movies.score,
-        'rated': movies.rated,
+        'rated': movies.rating
     }
     addMovieToDB(movie)
 }
@@ -219,62 +206,37 @@ function onLoad() {
 
 function addMovieToFavorite(movie) {
     const movieFavor = document.getElementById('movie-favorite')
-    let div1 = document.createElement('div')
-    div1.classList.add('my-5')
-    div1.classList.add('mx-2')
-    div1.classList.add('card')
-
-    let div2 = document.createElement('div')
-    div2.classList.add('row')
-    div1.appendChild(div2)
-
-    let div3 = document.createElement('div')
-    div3.classList.add('col-md-3')
-    div3.classList.add('my-3')
-    div2.appendChild(div3)
+    let div = document.createElement('div')
+    div.classList.add('card')
+    div.classList.add('mx-3')
+    div.classList.add('my-3')
+    div.style.width = '18rem'
 
     let img = document.createElement('img')
     img.setAttribute('src', movie.image_url)
+    img.setAttribute('id', 'imgSet')
     img.classList.add('img-fluid')
+    img.classList.add('my-4')
+    img.classList.add('mx-2')
     img.classList.add('rounded-4')
     img.classList.add('shadow')
     img.style.height = '20rem'
-    img.style.width = '15rem'
-    div3.appendChild(img)
+    div.appendChild(img)
 
-    let div4 = document.createElement('div')
-    div4.classList.add('col-md-9')
-    div4.classList.add('d-flex')
-    div2.appendChild(div4)
+    let divChild = document.createElement('div')
+    div.appendChild(divChild)
+    divChild.classList.add('card-body')
+    divChild.classList.add('d-flex')
+    divChild.classList.add('align-content-between')
+    divChild.classList.add('row')
 
-    let div5 = document.createElement('div')
-    div5.classList.add('card-body')
-    div5.classList.add('d-flex')
-    div5.classList.add('align-content-between')
-    div5.classList.add('row')
-    div4.appendChild(div5)
+    let h5 = document.createElement('h5')
+    h5.innerText = movie.title
+    divChild.appendChild(h5)
 
-    let h3 = document.createElement('h3')
-    h3.innerText = movie.title
-    div5.appendChild(h3)
-
-    let p = document.createElement('p')
-        // p.innerText = movie.synopsis
-    div5.appendChild(p)
-
-    let div6 = document.createElement('div')
-    div6.classList.add('d-flex')
-    div6.classList.add('justify-content-end')
-    div6.classList.add('mb-2')
-    div5.appendChild(div6)
-
-    let i = document.createElement('i')
-    i.classList.add('bi')
-    i.classList.add('bi-heart')
-    i.classList.add('me-3')
-    i.classList.add('fs-3')
-    i.setAttribute('id', 'heart')
-    div6.appendChild(i)
+    let divBtn = document.createElement('div')
+    divBtn.classList.add('d-flex')
+    divBtn.classList.add('justify-content-center')
 
     let button = document.createElement('button')
     button.classList.add('rounded-3')
@@ -282,27 +244,29 @@ function addMovieToFavorite(movie) {
     button.setAttribute('data-bs-toggle', 'modal')
     button.setAttribute('data-bs-target', '#exampleModal')
     button.classList.add('shadow')
+    button.classList.add('mx-1')
     button.innerText = 'Detail...'
     button.addEventListener('click', function() {
         showDetailsMovieFavor(movie)
     })
-    div6.appendChild(button)
+    divBtn.appendChild(button)
 
     let deleteBtn = document.createElement('button')
     deleteBtn.classList.add('rounded-3')
     deleteBtn.classList.add('border-0')
-    deleteBtn.classList.add('ms-3')
     deleteBtn.classList.add('shadow')
+    deleteBtn.classList.add('mx-1')
     deleteBtn.innerText = 'Delete'
     deleteBtn.addEventListener('click', function() {
         let conf = confirm(`You want to remove ${movie.title} from list`)
         if (conf) {
             deleteMovie(movie.id)
+            onLoad()
         }
     })
-    div6.appendChild(deleteBtn)
-
-    movieFavor.appendChild(div1)
+    divBtn.appendChild(deleteBtn)
+    divChild.appendChild(divBtn)
+    movieFavor.appendChild(div)
 }
 
 document.getElementById('searchBtn').addEventListener('click', () => {
@@ -334,14 +298,4 @@ function deleteMovie(id) {
     }).catch(error => {
         alert('Your movie is not in the database')
     })
-}
-
-function randomMovie() {
-    fetch('https://api.jikan.moe/v4/top/anime')
-        .then(response => {
-            return response.json()
-        }).then(data => {
-            console.log('yoooo', data)
-            listMovieSlide(data.data)
-        })
 }

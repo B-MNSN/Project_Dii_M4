@@ -17,12 +17,6 @@ nav {
     border-radius: 20px;
 }
 
-#heart,
-.toggleOff {
-    /* color: #000000; */
-}
-
 .toggleOn {
-    /* background-color: #FF0066; */
     color: #FF0066;
 }

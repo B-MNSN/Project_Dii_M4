@@ -14,7 +14,7 @@
 
 <body>
     <!-- navbar -->
-    <nav class="navbar">
+    <nav class="navbar sticky-sm-top">
         <div class="container-fluid">
             <a class="navbar-brand col-2 text-light">Navbar</a>
             <div class="col-4 d-flex" role="search">
@@ -88,7 +88,6 @@
 
     <div id="outside">
         <div class="row d-flex justify-content-center mt-5" id="cardList">
-
             <!-- <div class="card mx-3 my-3" style="width: 15rem;">
                 <img src="https://i.pinimg.com/564x/dc/65/77/dc65771d7831c47e89a9e49949292d9d.jpg" class="img-fluid my-4 mx-2 rounded-3" alt="...">
                 <div class="card-body">
@@ -103,48 +102,51 @@
 
 
     <!-- favorite movie -->
+    <div id="outsideFavor">
+        <h1 class="text-light my-5 ms-5">Movie Favorite</h1>
+        <div class="row d-flex justify-content-center" id="movie-favorite">
+            <!-- <div class="card my-5 mx-2" style="max-width: 540px;">
+                <div class="row">
+                    <div class="col-md-4 my-3">
+                        <img src="https://i.pinimg.com/564x/dc/65/77/dc65771d7831c47e89a9e49949292d9d.jpg" class="img-fluid rounded-4 " alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <div class="float-end mb-3">
+                                <i class="bi bi-heart me-2" id="heart"></i>
+                                <button class="rounded-3 border-0">Detail..</button>
+                            </div>
 
-    <div class="row my-5 mx-3" id="movie-favorite">
-        <h1 class="text-light">Movie Favorite</h1>
-        <!-- <div class="card my-5 mx-2" style="max-width: 540px;">
-            <div class="row">
-                <div class="col-md-4 my-3">
-                    <img src="https://i.pinimg.com/564x/dc/65/77/dc65771d7831c47e89a9e49949292d9d.jpg" class="img-fluid rounded-4 " alt="...">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <div class="float-end mb-3">
-                            <i class="bi bi-heart me-2" id="heart"></i>
-                            <button class="rounded-3 border-0">Detail..</button>
                         </div>
-
                     </div>
                 </div>
-            </div>
-        </div> -->
+            </div> -->
+        </div>
     </div>
+
 
     <!-- Modal Movies -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">DETAILS MOVIE</h5>
+                    <h5 class="modal-title fs-2 " id="exampleModalLabel">DETAILS MOVIE</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body m-3">
                     <div class="row">
                         <div class="col-md-4 d-flex justify-content-center">
                             <img src="" class="img-fluid rounded-4" id="imgMovie">
                         </div>
-                        <div class="col-md-8 d-flex row">
-                            <h1 id="nameMovie"><b></b></h1>
-                            <p id="typeMovie"><b>type :</b></p>
-                            <p id="epMovie"><b>episodes :</b></p>
-                            <p id="ratedMovie"><b>rated :</b></p>
-                            <p id="synopsisMovie"><b>synopsis :</b></p>
+                        <div class="col-md-8 d-flex row my-3">
+                            <h1 id="nameMovie"></h1>
+                            <p id="typeMovie"></p>
+                            <p id="epMovie"></p>
+                            <p id="ratedMovie"></p>
+                            <p id="scoreMovie"></p>
+                            <p id="synopsisMovie"></p>
                         </div>
                     </div>
                 </div>
