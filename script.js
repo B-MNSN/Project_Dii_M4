@@ -241,10 +241,13 @@ function addMovieToFavorite(movie) {
     let button = document.createElement('button')
     button.classList.add('rounded-3')
     button.classList.add('border-0')
+    button.classList.add('text-light')
     button.setAttribute('data-bs-toggle', 'modal')
     button.setAttribute('data-bs-target', '#exampleModal')
+    button.setAttribute('id', 'btnDetail')
     button.classList.add('shadow')
     button.classList.add('mx-1')
+    button.classList.add('px-4')
     button.innerText = 'Detail...'
     button.addEventListener('click', function() {
         showDetailsMovieFavor(movie)
@@ -256,6 +259,7 @@ function addMovieToFavorite(movie) {
     deleteBtn.classList.add('border-0')
     deleteBtn.classList.add('shadow')
     deleteBtn.classList.add('mx-1')
+    deleteBtn.classList.add('px-4')
     deleteBtn.innerText = 'Delete'
     deleteBtn.addEventListener('click', function() {
         let conf = confirm(`You want to remove ${movie.title} from list`)

@@ -4,7 +4,9 @@ body {
     background-color: #000033;
 }
 
-nav {
+nav,
+#btnDetail,
+.modal-header {
     background-color: #000033;
 }
 
