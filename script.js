@@ -95,6 +95,23 @@ function showDetailsMovie(movie) {
     scoreMovie.innerHTML = `<b>Score :</b>  ${movie.score}`
     let synopsisMovie = document.getElementById('synopsisMovie')
     synopsisMovie.innerHTML = `<b>SynopsisMovie :</b >  ${movie.synopsis}`
+
+    let btnAdd = document.getElementById('btnAdd')
+    btnAdd.innerHTML = ''
+    let btnAddFavorite = document.createElement('button')
+    btnAddFavorite.classList.add('rounded-2')
+    btnAddFavorite.classList.add('text-light')
+    btnAddFavorite.classList.add('shadow')
+    btnAddFavorite.setAttribute('id', 'addFavorite')
+    btnAddFavorite.innerHTML = "Add Favorite"
+    btnAddFavorite.addEventListener('click', function() {
+        let conf = confirm(`Add ${movie.title} to favorite?`)
+        if (conf) {
+            console.log(movie.title)
+            onAddMovieClickToFavorite(movie)
+        }
+    })
+    btnAdd.appendChild(btnAddFavorite)
 }
 
 function showDetailsMovieFavor(movie) {
@@ -183,14 +200,6 @@ function listMovieFavorite(listMovieFavorite) {
     }
 }
 
-function listMovieSlide(listMovieSlide) {
-    const slide = document.getElementById('slide')
-    slide.innerHTML = ''
-    for (movies of listMovieSlide) {
-        addMovieToSlide(movies)
-    }
-}
-
 document.getElementById('menu-home').addEventListener('click', (event) => {
     hideAll()
     cardList.style.display = 'block'
@@ -252,7 +261,6 @@ function addMovieToFavorite(movie) {
     let button = document.createElement('button')
     button.classList.add('rounded-3')
     button.classList.add('border-0')
-        // button.classList.add('text-light')
     button.setAttribute('data-bs-toggle', 'modal')
     button.setAttribute('data-bs-target', '#exampleModal')
     button.setAttribute('id', 'btnDetail')
@@ -316,15 +324,15 @@ function deleteMovie(id) {
     })
 }
 
-document.getElementById('KimiNoNaWa').addEventListener('click', () => {
+document.getElementById('kimiNoNaWa').addEventListener('click', () => {
     searchNameMovie('kimi no na wa')
 })
 
-document.getElementById('KimiNoNaWa').addEventListener('click', () => {
-    searchNameMovie('kimi no na wa')
+document.getElementById('totoro').addEventListener('click', () => {
+    searchNameMovie('totoro')
 })
 
-document.getElementById('SpiritedAway').addEventListener('click', () => {
+document.getElementById('spiritedAway').addEventListener('click', () => {
     searchNameMovie('sen to Chihiro')
 })
 

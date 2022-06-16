@@ -6,7 +6,8 @@ body {
 
 nav,
 #btnDelete,
-.modal-header {
+.modal-header,
+#addFavorite {
     background-color: #000033;
 }
 
