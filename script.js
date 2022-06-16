@@ -315,3 +315,25 @@ function deleteMovie(id) {
         alert('Your movie is not in the database')
     })
 }
+
+document.getElementById('KimiNoNaWa').addEventListener('click', () => {
+    searchNameMovie('kimi no na wa')
+})
+
+document.getElementById('KimiNoNaWa').addEventListener('click', () => {
+    searchNameMovie('kimi no na wa')
+})
+
+document.getElementById('SpiritedAway').addEventListener('click', () => {
+    searchNameMovie('sen to Chihiro')
+})
+
+function searchNameMovie(nameMovie) {
+    fetch(`https://api.jikan.moe/v4/anime?q=${nameMovie}`)
+        .then(response => {
+            return response.json()
+        }).then(data => {
+            console.log('yoo hoo', data.data[0])
+            showDetailsMovie(data.data[0])
+        })
+}
