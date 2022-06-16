@@ -8,7 +8,7 @@ function hideAll() {
     movieFavorite.style.display = 'none'
 }
 
-function addMovieToRow(movies, movieDB) {
+function addMovieToRow(movies) {
     const cardList = document.getElementById('cardList')
     let div = document.createElement('div')
     let img = document.createElement('img')
@@ -61,8 +61,6 @@ function addMovieToRow(movies, movieDB) {
     i.addEventListener('dblclick', function() {
         let conf = confirm(`Add ${movies.title} to favorite?`)
         if (conf) {
-            console.log('api', movies)
-            console.log('DB', movieDB)
             if (i.classList.contains('toggleOn')) {
                 i.classList.replace('toggleOn', 'toggleOff')
             } else if (i.classList.contains('toggleOff')) {
@@ -84,6 +82,7 @@ function showDetailsMovie(movie) {
     console.log('wow', movie)
     let imgMovie = document.getElementById('imgMovie')
     imgMovie.setAttribute('src', movie.images.jpg.image_url)
+    imgMovie.classList.add('shadow')
     let nameMovie = document.getElementById('nameMovie')
     nameMovie.innerHTML = movie.title
     let typeMovie = document.getElementById('typeMovie')
@@ -102,6 +101,7 @@ function showDetailsMovieFavor(movie) {
     console.log('wow', movie)
     let imgMovie = document.getElementById('imgMovie')
     imgMovie.setAttribute('src', movie.image_url)
+    imgMovie.classList.add('shadow')
     let nameMovie = document.getElementById('nameMovie')
     nameMovie.innerHTML = movie.title
     let typeMovie = document.getElementById('typeMovie')
@@ -136,7 +136,6 @@ function getMovieFavorite() {
             listMovieFavorite(data)
         })
 }
-
 
 function onAddMovieClickToFavorite(movies) {
     let movie = {}
@@ -184,6 +183,14 @@ function listMovieFavorite(listMovieFavorite) {
     }
 }
 
+function listMovieSlide(listMovieSlide) {
+    const slide = document.getElementById('slide')
+    slide.innerHTML = ''
+    for (movies of listMovieSlide) {
+        addMovieToSlide(movies)
+    }
+}
+
 document.getElementById('menu-home').addEventListener('click', (event) => {
     hideAll()
     cardList.style.display = 'block'
@@ -192,10 +199,14 @@ document.getElementById('menu-home').addEventListener('click', (event) => {
 })
 
 document.getElementById('menu-favorite').addEventListener('click', (event) => {
+    showMovieFavorite()
+})
+
+function showMovieFavorite() {
     hideAll()
     movieFavorite.style.display = 'block'
     getMovieFavorite()
-})
+}
 
 function onLoad() {
     hideAll()
@@ -241,7 +252,7 @@ function addMovieToFavorite(movie) {
     let button = document.createElement('button')
     button.classList.add('rounded-3')
     button.classList.add('border-0')
-    button.classList.add('text-light')
+        // button.classList.add('text-light')
     button.setAttribute('data-bs-toggle', 'modal')
     button.setAttribute('data-bs-target', '#exampleModal')
     button.setAttribute('id', 'btnDetail')
@@ -260,12 +271,13 @@ function addMovieToFavorite(movie) {
     deleteBtn.classList.add('shadow')
     deleteBtn.classList.add('mx-1')
     deleteBtn.classList.add('px-4')
+    deleteBtn.classList.add('text-light')
+    deleteBtn.setAttribute('id', 'btnDelete')
     deleteBtn.innerText = 'Delete'
     deleteBtn.addEventListener('click', function() {
         let conf = confirm(`You want to remove ${movie.title} from list`)
         if (conf) {
             deleteMovie(movie.id)
-            onLoad()
         }
     })
     divBtn.appendChild(deleteBtn)
@@ -298,7 +310,7 @@ function deleteMovie(id) {
         }
     }).then(data => {
         alert(`${data.title} is not now delete`)
-        onLoad()
+        showMovieFavorite()
     }).catch(error => {
         alert('Your movie is not in the database')
     })

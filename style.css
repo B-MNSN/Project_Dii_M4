@@ -5,7 +5,7 @@ body {
 }
 
 nav,
-#btnDetail,
+#btnDelete,
 .modal-header {
     background-color: #000033;
 }
@@ -21,4 +21,12 @@ nav,
 
 .toggleOn {
     color: #FF0066;
+}
+
+#synopsisMovie {
+    text-align: justify;
+}
+
+.imgSlide {
+    height: 40rem;
 }
